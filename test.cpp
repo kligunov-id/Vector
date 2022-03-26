@@ -30,7 +30,21 @@ void test_copy() {
     std::cout << "-------------------\n";
 }
 
+void test_push() {
+    std::cout << "-------------------\n" << "Test push\n";
+    custom_vector a;
+    for (size_t i = 0; i < 9; i ++) {
+        a.push_back(i);
+    }
+    std::cout << "Expected: 0 1 2 3 4 5 6 7 8\n" << "Recieved: ";
+    for (size_t i = 0; i < 9; i++) {
+        std::cout << a[i] << " ";
+    }
+    std::cout << "\n-------------------\n";
+}
+
 int main() {
     test_basic();
     test_copy();
+    test_push();
 }
