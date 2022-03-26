@@ -15,10 +15,22 @@ public:
 
     void reserve(size_t new_size);
     void push_back(int64_t x);
+    void shrink_to_fit();
+
+    int64_t size();
+    int64_t capacity();
 };
 
+int64_t custom_vector::size() {
+    return n;
+}
+
+int64_t custom_vector::capacity() {
+    return allocated_n;
+}
+
 void custom_vector::reserve(size_t new_size) {
-    if (new_size <= allocated_n) {
+    if (new_size < n) {
         return;
     }
     allocated_n = new_size;
@@ -38,6 +50,10 @@ void custom_vector::push_back(int64_t x) {
         reserve(allocated_n << 1);
     }
     arr[n++] = x;
+}
+
+void custom_vector::shrink_to_fit() {
+    reserve(n);
 }
 
 custom_vector::custom_vector(size_t n = 0): n(n), allocated_n(n) {

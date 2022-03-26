@@ -43,8 +43,21 @@ void test_push() {
     std::cout << "\n-------------------\n";
 }
 
+void test_utility() {
+    std::cout << "-------------------\n" << "Test utility\n";
+    custom_vector a(5);
+    std::cout << "Expected:\n    5 5\n    6 10\n    6 6\n" << "Recieved:\n";
+    std::cout << "    " << a.size() << " " << a.capacity() << "\n";
+    a.push_back(0);
+    std::cout << "    " << a.size() << " " << a.capacity() << "\n";
+    a.shrink_to_fit();    
+    std::cout << "    " << a.size() << " " << a.capacity() << "\n";
+    std::cout << "-------------------\n";
+}
+
 int main() {
     test_basic();
     test_copy();
     test_push();
+    test_utility();
 }
