@@ -13,6 +13,24 @@ void test_basic() {
     std::cout << "\n-------------------\n";
 }
 
+void func(custom_vector a) {
+    a[0] = a[0] + 1;
+}
+
+void test_copy() {
+    std::cout << "-------------------\n" << "Test copy\n";
+    std::cout << "Passing argument:\n";
+    custom_vector a(3), b;
+    func(a);
+    std::cout << "    Expected: 0\n" << "    Recieved: " << a[0] << "\n";
+    std::cout << "Assigning:\n";
+    b = a;
+    a[0] = 1;
+    std::cout << "    Expected: 0\n" << "    Recieved: " << b[0] << "\n";
+    std::cout << "-------------------\n";
+}
+
 int main() {
     test_basic();
+    test_copy();
 }
