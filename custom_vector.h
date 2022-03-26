@@ -14,12 +14,38 @@ public:
     int64_t& operator[](size_t i);
 
     void reserve(size_t new_size);
-    void push_back(int64_t x);
+    void resize(size_t new_size, int64_t value);    
     void shrink_to_fit();
+
+    void push_back(int64_t x);
+    void pop_back();
+
+    int64_t& front();
+    int64_t& back();
 
     int64_t size();
     int64_t capacity();
 };
+
+void custom_vector::resize(size_t new_size, int64_t value = 0) {
+    if (new_size > allocated_n) {
+        reserve(new_size);
+    }
+    if (new_size > n) {
+        for (size_t i = n; i < new_size; i++) {
+            arr[i] = value;
+        }
+    }
+    n = new_size;
+}
+
+int64_t& custom_vector::front() {
+    return arr[0];
+}
+
+int64_t& custom_vector::back() {
+    return arr[n - 1];
+}
 
 int64_t custom_vector::size() {
     return n;
@@ -40,6 +66,12 @@ void custom_vector::reserve(size_t new_size) {
     }
     delete[] arr;
     arr = new_arr;
+}
+
+void custom_vector::pop_back() {
+    if (n) {
+        --n;
+    }
 }
 
 void custom_vector::push_back(int64_t x) {

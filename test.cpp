@@ -55,9 +55,26 @@ void test_utility() {
     std::cout << "-------------------\n";
 }
 
+void test_utility2() {
+    std::cout << "-------------------\n" << "Test utility 2\n";
+    custom_vector a;
+    a.resize(1);
+    for (size_t i = 1; i < 5; i++){
+        a.resize(i + 1, i);
+    }
+    a.front()++;
+    std::cout << "Expected: 4 3 2 1 1\nRecieved: ";
+    for (size_t i = 0; i < 5; i++) {
+        std::cout << a.back() << " ";
+        a.pop_back();
+    }
+    std::cout << "\n-------------------\n";
+}
+
 int main() {
     test_basic();
     test_copy();
     test_push();
     test_utility();
+    test_utility2();
 }
