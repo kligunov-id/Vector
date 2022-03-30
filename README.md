@@ -1,5 +1,5 @@
 # Vector
 
-Vector is implemented in custom_vector.h
+Vector is implemented in vector.hpp
 
 Testing is done by test.cpp

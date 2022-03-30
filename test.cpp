@@ -1,9 +1,9 @@
 #include <iostream>
-#include "custom_vector.h"
+#include "vector.hpp"
 
 void test_basic() {
     std::cout << "-------------------\nBasic test\n";
-    custom_vector v(5), v_empty; 
+    CustomVector v(5), v_empty; 
     v[1] = 4;
     v[4] = v[1];
     std::cout << "Expected: 0 4 0 0 4\n" << "Recieved: ";
@@ -13,14 +13,14 @@ void test_basic() {
     std::cout << "\n-------------------\n";
 }
 
-void func(custom_vector a) {
+void func(CustomVector a) {
     a[0] = a[0] + 1;
 }
 
 void test_copy() {
     std::cout << "-------------------\n" << "Test copy\n";
     std::cout << "Passing argument:\n";
-    custom_vector a(3), b;
+    CustomVector a(3), b;
     func(a);
     std::cout << "    Expected: 0\n" << "    Recieved: " << a[0] << "\n";
     std::cout << "Assigning:\n";
@@ -32,7 +32,7 @@ void test_copy() {
 
 void test_push() {
     std::cout << "-------------------\n" << "Test push\n";
-    custom_vector a;
+    CustomVector a;
     for (size_t i = 0; i < 9; i ++) {
         a.push_back(i);
     }
@@ -45,22 +45,22 @@ void test_push() {
 
 void test_utility() {
     std::cout << "-------------------\n" << "Test utility\n";
-    custom_vector a(5);
+    CustomVector a(5);
     std::cout << "Expected:\n    5 5\n    6 10\n    6 6\n" << "Recieved:\n";
-    std::cout << "    " << a.size() << " " << a.capacity() << "\n";
+    std::cout << "    " << a.Size() << " " << a.Capacity() << "\n";
     a.push_back(0);
-    std::cout << "    " << a.size() << " " << a.capacity() << "\n";
-    a.shrink_to_fit();    
-    std::cout << "    " << a.size() << " " << a.capacity() << "\n";
+    std::cout << "    " << a.Size() << " " << a.Capacity() << "\n";
+    a.ShrinkToFit();    
+    std::cout << "    " << a.Size() << " " << a.Capacity() << "\n";
     std::cout << "-------------------\n";
 }
 
 void test_utility2() {
     std::cout << "-------------------\n" << "Test utility 2\n";
-    custom_vector a;
-    a.resize(1);
+    CustomVector a;
+    a.Resize(1);
     for (size_t i = 1; i < 5; i++){
-        a.resize(i + 1, i);
+        a.Resize(i + 1, i);
     }
     a.front()++;
     std::cout << "Expected: 4 3 2 1 1\nRecieved: ";
