@@ -71,10 +71,26 @@ void test_utility2() {
     std::cout << "\n-------------------\n";
 }
 
+void test_const() {
+    std::cout << "-------------------\n" << "Test const\n";
+    CustomVector v(3);
+    for (size_t i = 0; i < 3; i ++) {
+        v[i] = i;
+    }
+    const CustomVector v2 = v;
+    std::cout << "Expected: 3 3 - 0 1 2\n";
+    std::cout << "Recieved: " << v2.Size() << " " << v2.Capacity() << " -";
+    for (size_t i = 0; i < 3; i ++) {
+        std::cout << " " << v2[i];
+    }
+    std::cout << "\n-------------------\n";
+}
+
 int main() {
     test_basic();
     test_copy();
     test_push();
     test_utility();
     test_utility2();
+    test_const();
 }

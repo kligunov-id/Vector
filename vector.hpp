@@ -14,7 +14,7 @@ public:
     // + CustomVector& operator=(CustomVector&&)
 
     int64_t& operator[](size_t i);
-    // + const int64_t& operator[] (size_t i) const
+    const int64_t& operator[] (size_t i) const;
 
     void Reserve(size_t new_size);
     void Resize(size_t new_size, int64_t value);    
@@ -121,6 +121,10 @@ CustomVector& CustomVector::operator=(const CustomVector &other) {
 }
 
 int64_t& CustomVector::operator[](size_t i) {
+    return arr[i];
+}
+
+const int64_t& CustomVector::operator[](size_t i) const {
     return arr[i];
 }
 
