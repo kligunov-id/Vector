@@ -86,6 +86,25 @@ void test_const() {
     std::cout << "\n-------------------\n";
 }
 
+void test_move() {
+    std::cout << "-------------------\n" << "Test move\n";
+    CustomVector a, b;
+    for (size_t i = 0; i < 10; i++) {
+        a.push_back(i);
+    }
+    b = std::move(a);
+    std::cout << "Expected: 0 1 2 3 4 5 6 7 8 9\n" << "Recieved: ";
+    for (size_t i = 0; i < 10; i++) {
+        std::cout << b[i] << " ";
+    }
+    // With std::move() works significantly faster
+    for (size_t i = 0; i < 3000000; i++) {
+        a = std::move(b);
+        b = std::move(a);
+    }
+    std::cout << "\n-------------------\n";
+}
+
 int main() {
     test_basic();
     test_copy();
@@ -93,4 +112,5 @@ int main() {
     test_utility();
     test_utility2();
     test_const();
+    test_move();
 }

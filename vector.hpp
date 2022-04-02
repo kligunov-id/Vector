@@ -10,8 +10,7 @@ public:
     ~CustomVector();
     CustomVector(const CustomVector &other);
     CustomVector& operator=(CustomVector other);
-    // + CustomVector(CustomVector&&)
-    // + CustomVector& operator=(CustomVector&&)
+    CustomVector(CustomVector&& other);
 
     friend void swap(CustomVector& first, CustomVector& second);
 
@@ -114,6 +113,11 @@ CustomVector::CustomVector(const CustomVector &other) {
     for (size_t i = 0; i < n; ++i) {
         arr[i] = other.arr[i];
     }
+}
+
+CustomVector::CustomVector(CustomVector &&other): n(other.n), allocated_n(other.allocated_n) {
+    arr = other.arr;
+    other.arr = nullptr;
 }
 
 // Copy-and-swap
