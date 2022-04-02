@@ -9,9 +9,11 @@ public:
     explicit CustomVector(size_t n);
     ~CustomVector();
     CustomVector(const CustomVector &other);
-    CustomVector& operator=(const CustomVector &other);
+    CustomVector& operator=(CustomVector other);
     // + CustomVector(CustomVector&&)
     // + CustomVector& operator=(CustomVector&&)
+
+    friend void swap(CustomVector& first, CustomVector& second);
 
     int64_t& operator[](size_t i);
     const int64_t& operator[] (size_t i) const;
@@ -29,6 +31,12 @@ public:
     size_t Size() const;
     size_t Capacity() const;
 };
+
+void swap(CustomVector& first, CustomVector& second) {
+    std::swap(first.n, second.n);
+    std::swap(first.allocated_n, second.allocated_n);
+    std::swap(first.arr, second.arr);
+}
 
 void CustomVector::Resize(size_t new_size, int64_t value = 0) {
     if (new_size > allocated_n) {
@@ -108,15 +116,10 @@ CustomVector::CustomVector(const CustomVector &other) {
     }
 }
 
-// Copy-and-Swap
-CustomVector& CustomVector::operator=(const CustomVector &other) {
-    n = other.n;
-    allocated_n = other.allocated_n;
-    delete[] arr;
-    arr = new int64_t[allocated_n];
-    for (size_t i = 0; i < n; ++i) {
-        arr[i] = other.arr[i];
-    }
+// Copy-and-swap
+// Accepts by value, so it is both copy assignment and move assignment
+CustomVector& CustomVector::operator=(CustomVector other) {
+    swap(*this, other);
     return *this;
 }
 
